@@ -3,6 +3,7 @@ package com.cg.go.greatoutdoor.product.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,7 +22,7 @@ import com.cg.go.greatoutdoor.product.dto.UpdateProductRequest;
 import com.cg.go.greatoutdoor.product.entity.ProductEntity;
 import com.cg.go.greatoutdoor.product.service.IProductService;
 
-@RequestMapping("/productEntity")
+@RequestMapping("/productstable")
 @RestController
 public class ProductController {
 	
@@ -29,7 +30,7 @@ public class ProductController {
 	public IProductService productService;
 	
 	/**
-     * effective url will be http://localhost:8585/productEntity/add
+     * effective url will be http://localhost:8585/productstable/add
      */
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/add")
@@ -45,7 +46,8 @@ public class ProductController {
     public ProductDetails update(@RequestBody UpdateProductRequest requestData) {
 		ProductEntity product = new ProductEntity(requestData.getProductName(), requestData.getPrice(), requestData.getImage(),requestData.getColor(),
         		requestData.getCategory(),requestData.getQuantity(),requestData.getManufacturer(),requestData.getSpecification());
-        product = productService.updateProduct(product);
+		product.setProductId(requestData.getProductId());
+		product = productService.updateProduct(product);
         ProductDetails details = toDetails(product);
         return details;
     }
@@ -80,7 +82,7 @@ public class ProductController {
     }
     
     @GetMapping("/by/maxprice/{price}")
-    public List<ProductDetails> findProduct(@PathVariable("price") double maxPrice) {
+    public List<ProductDetails> filterProduct(@PathVariable("price") double maxPrice) {
         List<ProductEntity> product = productService.filter(maxPrice);
         List<ProductDetails> details = toDetails(product);
         return details;

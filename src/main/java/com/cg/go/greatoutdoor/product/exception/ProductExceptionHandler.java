@@ -12,9 +12,9 @@ public class ProductExceptionHandler {
 
     private static final Logger Log= LoggerFactory.getLogger(ProductExceptionHandler.class);
     
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ProductException.class)
-    public String handleStudentNotFound(ProductException e){
+    public String handleProductException(ProductException e){
          return e.getMessage();
     }
     @ResponseStatus(HttpStatus.BAD_REQUEST)

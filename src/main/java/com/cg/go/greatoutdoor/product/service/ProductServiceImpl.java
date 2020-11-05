@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.cg.go.greatoutdoor.product.dao.IProductRepository;
 import com.cg.go.greatoutdoor.product.entity.ProductEntity;
+import com.cg.go.greatoutdoor.product.exception.ProductException;
 
 @Transactional
 @Service
@@ -30,9 +31,9 @@ public class ProductServiceImpl implements IProductService{
 	@Override
 	public ProductEntity findByProductId(Integer productId) {
 		Optional<ProductEntity> optional=daoProduct.findById(productId);
-		/*if(!optional.isPresent()){
+		if(!optional.isPresent()){
             throw new ProductException("Product not found for id="+productId);
-        }*/
+        }
 		ProductEntity product=optional.get();
 		return product;
 	}
@@ -46,20 +47,20 @@ public class ProductServiceImpl implements IProductService{
 	@Override
 	public ProductEntity addProduct(ProductEntity productEntity) {
 		
-		/*boolean exists=productEntity.getProductId()!=null && daoProduct.existsById(productEntity.getProductId());
+		boolean exists=productEntity.getProductId()!=null && daoProduct.existsById(productEntity.getProductId());
         if(exists){
             throw new ProductException("Product already exists for id="+productEntity.getProductId());
-        }*/
+        }
 		ProductEntity product=daoProduct.save(productEntity);
 		return product;
 	}
 
 	@Override
 	public ProductEntity updateProduct(ProductEntity productEntity)  {
-		/*boolean exists=productEntity.getProductId()!=null && daoProduct.existsById(productEntity.getProductId());
+		boolean exists=productEntity.getProductId()!=null && daoProduct.existsById(productEntity.getProductId());
         if(!exists){
             throw new ProductException("Product does not exists for id="+productEntity.getProductId());
-        }*/
+        }
 		ProductEntity product=daoProduct.save(productEntity);
 		return product;
 	}
@@ -78,9 +79,9 @@ public class ProductServiceImpl implements IProductService{
 	@Override
 	public void deleteByProductId(Integer productId) {
 		Optional<ProductEntity> optional=daoProduct.findById(productId);
-		/*if(!optional.isPresent()){
+		if(!optional.isPresent()){
             throw new ProductException("Product not found for id="+productId);
-        }*/
+        }
 		daoProduct.deleteById(productId);
 		
 	}
