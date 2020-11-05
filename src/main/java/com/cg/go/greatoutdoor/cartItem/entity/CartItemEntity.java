@@ -1,6 +1,7 @@
 package com.cg.go.greatoutdoor.cartItem.entity;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import com.cg.go.greatoutdoor.product.entity.ProductEntity;
@@ -10,9 +11,10 @@ import java.util.Objects;
 
 @Entity
 public class CartItemEntity {
+	@GeneratedValue
 	@Id
-	private long cartId;
-	private String userId;
+	private Integer cartId;
+	private Integer userId;
 	@ElementCollection
 	private Map<ProductEntity, Integer> products ;// product ,quantity
 	private double cartTotalPrice;
@@ -20,9 +22,9 @@ public class CartItemEntity {
 	
 	
 	
-	public CartItemEntity(long cartId, String userId, Map<ProductEntity, Integer> products, double cartTotalPrice,
+	public CartItemEntity(Integer userId, Map<ProductEntity, Integer> products, double cartTotalPrice,
 			long totalQuantity) {
-		this.cartId = cartId;
+		
 		this.userId = userId;
 		this.products = products;
 		this.cartTotalPrice = cartTotalPrice;
@@ -31,16 +33,16 @@ public class CartItemEntity {
 	public CartItemEntity() {
 		 
 	}
-	public long getCartId() {
+	public Integer getCartId() {
 		return cartId;
 	}
-	public void setCartId(long cartId) {
+	public void setCartId(Integer cartId) {
 		this.cartId = cartId;
 	}
-	public String getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 	public Map<ProductEntity, Integer> getProducts() {
