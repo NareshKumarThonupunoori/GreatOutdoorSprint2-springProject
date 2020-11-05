@@ -57,7 +57,7 @@ public class ProductServiceImpl implements IProductService{
 
 	@Override
 	public ProductEntity updateProduct(ProductEntity productEntity)  {
-		boolean exists=productEntity.getProductId()!=null && daoProduct.existsById(productEntity.getProductId());
+		boolean exists= daoProduct.existsById(productEntity.getProductId());
         if(!exists){
             throw new ProductException("Product does not exists for id="+productEntity.getProductId());
         }
@@ -65,16 +65,6 @@ public class ProductServiceImpl implements IProductService{
 		return product;
 	}
 
-	/*@Override
-	public void updateProductQuantity(Integer quantity, Integer productId) {
-		Optional<ProductEntity> optional=daoProduct.findById(productId);
-		if(!optional.isPresent()){
-            throw new ProductException("Product not found for id="+productId);
-        }
-		ProductEntity product=optional.get();
-		product.setQuantity(quantity);
-		
-	}*/
 
 	@Override
 	public void deleteByProductId(Integer productId) {
@@ -96,7 +86,17 @@ public class ProductServiceImpl implements IProductService{
 	@Override
 	public List<ProductEntity> filter(double maxPrice) {
 		List<ProductEntity> list=daoProduct.findByRange(maxPrice);
-		return null;
+		return list;
 	}
 	
+	/*@Override
+	public void updateProductQuantity(Integer quantity, Integer productId) {
+		Optional<ProductEntity> optional=daoProduct.findById(productId);
+		if(!optional.isPresent()){
+            throw new ProductException("Product not found for id="+productId);
+        }
+		ProductEntity product=optional.get();
+		product.setQuantity(quantity);
+		
+	}*/
 }

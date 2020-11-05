@@ -3,7 +3,8 @@ package com.cg.go.greatoutdoor.product.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,11 +22,14 @@ import com.cg.go.greatoutdoor.product.dto.ProductDetails;
 import com.cg.go.greatoutdoor.product.dto.UpdateProductRequest;
 import com.cg.go.greatoutdoor.product.entity.ProductEntity;
 import com.cg.go.greatoutdoor.product.service.IProductService;
+import com.cg.go.greatoutdoor.product.service.ProductServiceImpl;
 
 @RequestMapping("/productstable")
 @RestController
 public class ProductController {
 	
+	 private static final Logger Log = LoggerFactory.getLogger(ProductController.class);
+		
 	@Autowired
 	public IProductService productService;
 	
@@ -105,6 +109,7 @@ public class ProductController {
     
 
     private List<ProductDetails> toDetails(List<ProductEntity> products) {
+    	Log.info("Inside toDetails products:"+products);
     	List<ProductDetails> productDetails = new ArrayList<>();
         for (ProductEntity product : products) {
         	ProductDetails details = toDetails(product);

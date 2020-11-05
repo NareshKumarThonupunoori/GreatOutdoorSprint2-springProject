@@ -16,7 +16,6 @@ public interface IProductRepository extends JpaRepository<ProductEntity,Integer>
 	@Query("from ProductEntity where price<=:maxPrice")
 	List<ProductEntity> findByRange(@Param("maxPrice") double maxPrice);
 	
-	
 	List<ProductEntity> findByCategory(String productCategory);
 
 	List<ProductEntity> findByProductName(String keyword);
