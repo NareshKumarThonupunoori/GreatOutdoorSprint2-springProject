@@ -49,11 +49,13 @@ public class OrderController {
 	}
 
 	@PutMapping("/update")
-    public void update(@RequestBody UpdateOrderRequest requestData) {
+    public OrderDetails update(@RequestBody UpdateOrderRequest requestData) {
     	OrderEntity order = new OrderEntity(requestData.getUserId(),requestData.getTotalPrice(),
         		requestData.getTotalQuantity(),requestData.getDispatchDate(),requestData.getDeliveryDate());
 		order.setOrderId(requestData.getOrderId());
-		orderService.updateDate(order.getOrderId(),order.getDispatchDate(),order.getDeliveryDate());
+		order=orderService.updateDate(order.getOrderId(),order.getDispatchDate(),order.getDeliveryDate());
+		OrderDetails details=toDetails(order);
+		return details;
 
     }
 

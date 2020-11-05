@@ -15,7 +15,7 @@ public interface IOrderService {
 
 	public void deleteOrderById(Integer orderId);
 
-	public void updateDate(Integer orderId, LocalDate dispatchDate, LocalDate arrivalDate);
+	public OrderEntity updateDate(Integer orderId, LocalDate dispatchDate, LocalDate arrivalDate);
 
 	
 

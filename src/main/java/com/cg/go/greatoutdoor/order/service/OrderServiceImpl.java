@@ -31,7 +31,7 @@ public class OrderServiceImpl implements IOrderService {
 	}
 	@Override
 	public List<OrderEntity> findAllOrders(){
-        List<OrderEntity> list= daoOrder.findAllOrders();
+        List<OrderEntity> list= daoOrder.findAll();
 		return list;
 	}
 	@Override
@@ -43,7 +43,7 @@ public class OrderServiceImpl implements IOrderService {
 	@Override
 	public void deleteAllOrders() {
 		
-        daoOrder.deleteAllOrders();
+        daoOrder.deleteAll();
         
 	}
 	@Override
@@ -54,11 +54,12 @@ public class OrderServiceImpl implements IOrderService {
 	}
 	
 	@Override
-	public void updateDate(Integer orderId, LocalDate dispatchDate, LocalDate arrivalDate) {
+	public OrderEntity updateDate(Integer orderId, LocalDate dispatchDate, LocalDate arrivalDate) {
 		Optional<OrderEntity> optional=daoOrder.findById(orderId);
 		OrderEntity order=optional.get();
 		order.setDispatchDate(dispatchDate);
 		order.setDeliveryDate(arrivalDate);
+		return order;
 	}
 
 }
