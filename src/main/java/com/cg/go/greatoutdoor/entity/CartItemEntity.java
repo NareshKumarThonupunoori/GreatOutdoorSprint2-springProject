@@ -3,10 +3,12 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import java.util.Map;
 import java.util.Objects;
 
+@Table(name="cartItem")
 @Entity
 public class CartItemEntity {
 	@GeneratedValue
