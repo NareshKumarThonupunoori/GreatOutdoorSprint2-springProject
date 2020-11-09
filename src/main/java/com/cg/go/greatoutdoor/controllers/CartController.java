@@ -41,7 +41,7 @@ public class CartController {
     public CartItemDetails add(@RequestBody CreateCartItemRequest requestData) {
         CartItemEntity cartItem = cartItemUtil.convertToCartItem(requestData);
         cartItem = cartService.addCart(cartItem);
-        CartItemDetails details = toDetails(cartItem);
+        CartItemDetails details = cartItemUtil.toDetails(cartItem);
         return details;
     }
 
@@ -50,7 +50,7 @@ public class CartController {
 		CartItemEntity cartItem = cartItemUtil.convertToCartItem(requestData);
 		cartItem.setCartId(requestData.getCartId());
 		cartItem = cartService.updateCart(cartItem);
-        CartItemDetails details = toDetails(cartItem);
+        CartItemDetails details = cartItemUtil.toDetails(cartItem);
         return details;
     }
 
@@ -60,7 +60,7 @@ public class CartController {
 	@GetMapping("/by/userid/{id}")
     public List<CartItemDetails> findProduct(@PathVariable("id") Integer userId) {
     	List<CartItemEntity> cartItem = cartService.findCartlist(userId);
-        List<CartItemDetails> details = toDetails(cartItem);
+        List<CartItemDetails> details = cartItemUtil.toDetails(cartItem);
         return details;
     }
     
@@ -74,24 +74,8 @@ public class CartController {
 	@GetMapping("/by/productid/userid/{userid}/{productid}")
 	 public CartItemDetails findByProductUserId(@PathVariable("userid") Integer userId,@PathVariable("productid") Integer productId) {
 		CartItemEntity cartItem = cartService.findCartItem(productId, userId);
-        CartItemDetails details = toDetails(cartItem);
+        CartItemDetails details = cartItemUtil.toDetails(cartItem);
         return details;
     }
-	private CartItemDetails toDetails(CartItemEntity cartItem) {
-		CartItemDetails details =new CartItemDetails(cartItem.getCartId(),cartItem.getUserId(),cartItem.getCartTotalPrice(),
-				cartItem.getProducts(),cartItem.getTotalQuantity());
-		return details;
-	}
-	
-   
-
-	private List<CartItemDetails> toDetails(List<CartItemEntity> cartItem) {
-		List<CartItemDetails> cartDetails=new ArrayList<>();
-    	for(CartItemEntity cart:cartItem) {
-    		CartItemDetails details=toDetails(cart);
-    		cartDetails.add(details);
-    	}
-		return cartDetails;
-	}
        
 }

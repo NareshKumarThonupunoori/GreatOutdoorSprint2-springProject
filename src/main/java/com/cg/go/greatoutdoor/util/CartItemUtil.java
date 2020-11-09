@@ -1,11 +1,13 @@
 package com.cg.go.greatoutdoor.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import com.cg.go.greatoutdoor.dto.cartItem.CartItemDetails;
 import com.cg.go.greatoutdoor.dto.cartItem.CreateCartItemRequest;
 import com.cg.go.greatoutdoor.dto.cartItem.UpdateCartItemRequest;
 import com.cg.go.greatoutdoor.entity.CartItemEntity;
@@ -50,5 +52,22 @@ public class CartItemUtil {
 		cart.setCartTotalPrice(totalPrice);
 		cart.setTotalQuantity(totalQuantity);
 		return cart;
+	}
+	
+	public CartItemDetails toDetails(CartItemEntity cartItem) {
+		CartItemDetails details =new CartItemDetails(cartItem.getCartId(),cartItem.getUserId(),cartItem.getCartTotalPrice(),
+				cartItem.getProducts(),cartItem.getTotalQuantity());
+		return details;
+	}
+	
+   
+
+	public List<CartItemDetails> toDetails(List<CartItemEntity> cartItem) {
+		List<CartItemDetails> cartDetails=new ArrayList<>();
+    	for(CartItemEntity cart:cartItem) {
+    		CartItemDetails details=toDetails(cart);
+    		cartDetails.add(details);
+    	}
+		return cartDetails;
 	}
 }
