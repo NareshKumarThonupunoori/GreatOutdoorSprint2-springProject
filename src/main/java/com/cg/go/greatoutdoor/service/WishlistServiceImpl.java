@@ -33,6 +33,9 @@ public class WishlistServiceImpl  implements IWishlistService{
 	public List<WishlistItemEntity> findByUserId(int userId) {
 		
 	     List<WishlistItemEntity> list=WishlistRepository.findByUserId(userId);
+	     if(list.size()==0) {
+	    	 throw new WishlistNotFoundException("Wishlist not found for userId="+userId);
+	     }
       	return list;
 	}
 	@Override
@@ -53,7 +56,7 @@ public class WishlistServiceImpl  implements IWishlistService{
 	//	if(wishlistItem==null){
 		//	throw new WishlistException("invalid wishlistitem");
 		//}
-		boolean exists=wishlistItem.getWishlistId()!=0 &&  WishlistRepository.existsById(wishlistItem.getWishlistId());
+		boolean exists=wishlistItem.getWishlistId()!=null &&  WishlistRepository.existsById(wishlistItem.getWishlistId());
         if(exists){
             throw new WishlistException("Cart already exists for id="+wishlistItem.getUserId());
         }

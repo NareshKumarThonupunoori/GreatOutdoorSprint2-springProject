@@ -14,8 +14,8 @@ import java.util.Objects;
 public class WishlistItemEntity {
     @GeneratedValue
     @Id
-    private int wishlistId;
-    private int userId;
+    private Integer wishlistId;
+    private Integer userId;
    // @ElementCollection
     //private List<String> productId;
 
@@ -28,11 +28,11 @@ public class WishlistItemEntity {
     public WishlistItemEntity() {
     }
 
-    public int getWishlistId() {
+    public Integer getWishlistId() {
         return wishlistId;
     }
 
-    public void setWishlistId(int wishlistId) {
+    public void setWishlistId(Integer wishlistId) {
         this.wishlistId = wishlistId;
     }
 

@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 
 public class CreateWishlistItemRequest {
 //	@NotBlank @Size(min =2, max = 20)
-	private int wishlistId;
+	private Integer wishlistId;
 	//@NotBlank @Size(min =2, max = 20)
     private int userId;
   //  @ElementCollection
@@ -19,10 +19,10 @@ public class CreateWishlistItemRequest {
 	public void setWishlistId(int wishlistId) {
 		this.wishlistId = wishlistId;
 	}
-	public int getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 }

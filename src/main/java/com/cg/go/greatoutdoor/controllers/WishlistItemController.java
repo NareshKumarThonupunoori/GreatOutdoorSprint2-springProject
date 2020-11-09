@@ -37,7 +37,7 @@ public class WishlistItemController {
     }
 
     @GetMapping("/get/user/{id}")
-	public List<WishlistItemDetails> fetchCustomer(@PathVariable("id") int userId) 
+	public List<WishlistItemDetails> fetchWishlist(@PathVariable("id") int userId) 
 	{
     	List<WishlistItemEntity> add = wishlistService.findByUserId(userId);
 		return wishlistutil.toDetails(add);
