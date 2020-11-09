@@ -31,22 +31,13 @@ public class WishlistServiceImpl  implements IWishlistService{
 
 	@Override
 	public List<WishlistItemEntity> findByUserId(int userId) {
-		Optional<WishlistItemEntity> optional=WishlistRepository.findById(userId);
-		if(!optional.isPresent()){
-            throw new WishlistNotFoundException("Product not found for id="+userId);
-        }
-	/*	if(userId==0){
-	         throw new WishlistException("UserId is null or empty");
-			}*/
+		
 	     List<WishlistItemEntity> list=WishlistRepository.findByUserId(userId);
       	return list;
 	}
 	@Override
 	public void deleteByUserId(int userId){
-		Optional<WishlistItemEntity> optional=WishlistRepository.findById(userId);
-		if(!optional.isPresent()){
-            throw new WishlistNotFoundException("Product not found for id="+userId);
-        }
+		
 		List<WishlistItemEntity> wishlist= findByUserId(userId);
 		for(WishlistItemEntity item : wishlist)
 		{

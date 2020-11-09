@@ -26,7 +26,7 @@ public class WishlistItemController {
 	@Autowired
 	private WishlistUtil wishlistutil;
 	/**
-     * effective URL will be http://localhost:8888Wishlist/add
+     * effective URL will be http://localhost:8585/Wishlist/add
 	 * @throws WishlistException 
      */
     @ResponseStatus(HttpStatus.CREATED)

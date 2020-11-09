@@ -29,36 +29,54 @@ public class SalesReportServiceImpl implements ISalesReportService {
 	@Override
 	public List<SalesReportEntity> findAllSalesReport() {
 		List<SalesReportEntity> list=salesReportRepository.findAll();
+		if(list.isEmpty())
+			throw new SalesReportException("Sales Report is empty");
 		return list;
+		
 	}
 
 	@Override
 	public SalesReportEntity findSalesReportByProductId(String productId) {
 		SalesReportEntity list=salesReportRepository.findByProductId(productId);
-		/*if(list.equals(null)) {
-			throw new SalesReportException("sales repot not foung for productId");
-		}*/
+		if(list==null) {
+			throw new SalesReportException("Sales report not found given productId="+productId);
+		}
 		return list;
 	}
 
 	@Override
 	public void updateProductReport(SalesReportEntity salesReportEntity) {
-		// TODO Auto-generated method stub
+	
+		boolean exist=salesReportRepository.existsById(salesReportEntity.getSalesReportId());
+		if(!exist) {
+			throw new SalesReportException("sales report not found");
+		}
+		salesReportRepository.save(salesReportEntity);
 		
 	}
 
+	/*@Override
+	public void updateProductReport(SalesReportEntity salesReportEntity) {
+	
+		SalesReportEntity exist=salesReportRepository.findByProductId(salesReportEntity.getProductId());
+		if(exist==null) {
+			throw new SalesReportException("sales report not found");
+		}
+		salesReportRepository.save(salesReportEntity);
+		
+	}*/
 	@Override
-	public void deleteAllSalesReport() throws SalesReportException {
+	public void deleteAllSalesReport(){
 		// TODO Auto-generated method stub
 		salesReportRepository.deleteAll();
 		
 	}
 
 	@Override
-	public void deleteSalesReportById(Long salesReportId) throws SalesReportException {
+	public void deleteSalesReportById(Long salesReportId){
 		Optional<SalesReportEntity> optional=salesReportRepository.findById(salesReportId);
 		if(!optional.isPresent()){
-            throw new ProductException("sales report not found for id="+salesReportId);
+            throw new SalesReportException("sales report not found for id="+salesReportId);
         }
 		salesReportRepository.deleteById(salesReportId);
 		
