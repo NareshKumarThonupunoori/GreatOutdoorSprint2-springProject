@@ -20,6 +20,7 @@ import com.cg.go.greatoutdoor.dto.cartItem.CreateCartItemRequest;
 import com.cg.go.greatoutdoor.dto.cartItem.UpdateCartItemRequest;
 import com.cg.go.greatoutdoor.entity.CartItemEntity;
 import com.cg.go.greatoutdoor.service.ICartService;
+import com.cg.go.greatoutdoor.util.CartItemUtil;
 
 @RequestMapping("/cartitem")
 @RestController
@@ -28,6 +29,9 @@ public class CartController {
 	@Autowired
 	public ICartService cartService;
 	
+	@Autowired
+	public CartItemUtil cartItemUtil;
+	
 	/**
      * effective url will be http://localhost:8585/cartitem/add
      */
@@ -35,8 +39,7 @@ public class CartController {
 	@ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/add")
     public CartItemDetails add(@RequestBody CreateCartItemRequest requestData) {
-        CartItemEntity cartItem = new CartItemEntity(requestData.getUserId(),
-        		requestData.getCartTotalPrice(),requestData.getTotalQuantity());
+        CartItemEntity cartItem = cartItemUtil.convertToCartItem(requestData);
         cartItem = cartService.addCart(cartItem);
         CartItemDetails details = toDetails(cartItem);
         return details;
@@ -44,8 +47,7 @@ public class CartController {
 
 	@PutMapping("/update")
     public CartItemDetails update(@RequestBody UpdateCartItemRequest requestData) {
-		CartItemEntity cartItem = new CartItemEntity(requestData.getUserId(),
-        		requestData.getCartTotalPrice(),requestData.getTotalQuantity());
+		CartItemEntity cartItem = cartItemUtil.convertToCartItem(requestData);
 		cartItem.setCartId(requestData.getCartId());
 		cartItem = cartService.updateCart(cartItem);
         CartItemDetails details = toDetails(cartItem);
@@ -69,9 +71,15 @@ public class CartController {
         return response;
     }
 	
+	@GetMapping("/by/productid/userid/{userid}/{productid}")
+	 public CartItemDetails findByProductUserId(@PathVariable("userid") Integer userId,@PathVariable("productid") Integer productId) {
+		CartItemEntity cartItem = cartService.findCartItem(productId, userId);
+        CartItemDetails details = toDetails(cartItem);
+        return details;
+    }
 	private CartItemDetails toDetails(CartItemEntity cartItem) {
 		CartItemDetails details =new CartItemDetails(cartItem.getCartId(),cartItem.getUserId(),cartItem.getCartTotalPrice(),
-				cartItem.getTotalQuantity());
+				cartItem.getProducts(),cartItem.getTotalQuantity());
 		return details;
 	}
 	

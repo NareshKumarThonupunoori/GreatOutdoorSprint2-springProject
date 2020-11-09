@@ -35,7 +35,7 @@ public class CustomerController {
 	@ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/add")
     public CustomerDetails add(@RequestBody CreateCustomerRequest requestData) {
-		Customer customer=new Customer(requestData.getCustomerName(),requestData.getMobileNo(),requestData.getEmail(),requestData.getRole());
+		Customer customer=new Customer(requestData.getCustomerName(),requestData.getMobileNo(),requestData.getEmail(),requestData.getAddress(),requestData.getRole());
 		customer=customerService.addCustomer(customer);
 		CustomerDetails details=toDetails(customer);
 		return details;
@@ -43,7 +43,7 @@ public class CustomerController {
 
     @PutMapping("/update")
     public CustomerDetails update(@RequestBody UpdateCustomerRequest requestData) {
-		Customer customer=new Customer(requestData.getCustomerName(),requestData.getMobileNo(),requestData.getEmail(),requestData.getRole());
+		Customer customer=new Customer(requestData.getCustomerName(),requestData.getMobileNo(),requestData.getEmail(),requestData.getAddress(),requestData.getRole());
 		customer.setCustomerId(requestData.getCustomerId());
 		customer=customerService.updateCustomer(customer);
 		CustomerDetails details=toDetails(customer);
@@ -75,7 +75,7 @@ public class CustomerController {
 	
 	private CustomerDetails toDetails(Customer customer) {
 		CustomerDetails details=new CustomerDetails(customer.getCustomerId(),customer.getCustomerName(),customer.getMobileNo(),
-				customer.getEmail(),customer.getRole());
+				customer.getEmail(),customer.getAddress(),customer.getRole());
 		return details;
 	}
 	

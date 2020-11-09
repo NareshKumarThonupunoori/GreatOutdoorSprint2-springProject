@@ -2,9 +2,11 @@ package com.cg.go.greatoutdoor.entity;
 
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Table(name="customers")
@@ -16,16 +18,16 @@ public class Customer {
 	private String customerName;
 	private String mobileNo;
 	private String email;
-	//@OneToOne(cascade = {CascadeType.ALL})
-	//private Address address;
+	@OneToOne(cascade = {CascadeType.ALL})
+	private Address address;
 	private String role; //sales representative or retailer
 	
-	public Customer(String customerName, String mobileNo, String email, String role) {
+	public Customer(String customerName, String mobileNo, String email, Address address, String role) {
 		super();
 		this.customerName = customerName;
 		this.mobileNo = mobileNo;
 		this.email = email;
-		//this.address = address;
+		this.address = address;
 		this.role = role;
 	}
 	public Customer() {
@@ -55,12 +57,12 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	/*public Address getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 	public void setAddress(Address address) {
 		this.address = address;
-	}*/
+	}
 	public String getRole() {
 		return role;
 	}

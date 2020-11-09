@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class CentralizedExceptionHandler {
+public class GlobalException {
 
-    private static final Logger Log= LoggerFactory.getLogger(CentralizedExceptionHandler.class);
+    private static final Logger Log= LoggerFactory.getLogger(GlobalException.class);
     
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ProductException.class)

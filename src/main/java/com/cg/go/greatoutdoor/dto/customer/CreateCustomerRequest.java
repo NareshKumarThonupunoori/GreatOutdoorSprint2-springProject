@@ -1,23 +1,25 @@
 package com.cg.go.greatoutdoor.dto.customer;
 
-import java.util.Objects;
 
-import com.cg.go.greatoutdoor.entity.Customer;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToOne;
+
+import com.cg.go.greatoutdoor.entity.Address;
 
 public class CreateCustomerRequest {
 	private String customerName;
 	private String mobileNo;
 	private String email;
-	//@OneToOne(cascade = {CascadeType.ALL})
-	//private Address address;
+	@OneToOne(cascade = {CascadeType.ALL})
+	private Address address;
 	private String role; //sales representative or retailer
 	
-	public CreateCustomerRequest( String customerName, String mobileNo, String email, String role) {
+	public CreateCustomerRequest( String customerName, String mobileNo, String email, Address address,String role) {
 		
 		this.customerName = customerName;
 		this.mobileNo = mobileNo;
 		this.email = email;
-		//this.address = address;
+		this.address = address;
 		this.role = role;
 	}
 	public CreateCustomerRequest() {
@@ -41,12 +43,12 @@ public class CreateCustomerRequest {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	/*public Address getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 	public void setAddress(Address address) {
 		this.address = address;
-	}*/
+	}
 	public String getRole() {
 		return role;
 	}

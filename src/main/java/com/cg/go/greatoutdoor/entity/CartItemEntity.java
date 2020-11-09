@@ -1,8 +1,10 @@
 package com.cg.go.greatoutdoor.entity;
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import java.util.Map;
@@ -15,20 +17,20 @@ public class CartItemEntity {
 	@Id
 	private Integer cartId;
 	private Integer userId;
-	//@ElementCollection
-	//private Map<ProductEntity, Integer> products ;// product ,quantity
+	//@OneToMany(cascade = {CascadeType.ALL})
+	@ElementCollection
+	private Map<ProductEntity, Integer> products ;// product ,quantity
 	private double cartTotalPrice;
-	private long totalQuantity;
+	private Integer totalQuantity;
 	
 	
 	
-	public CartItemEntity(Integer userId, double cartTotalPrice,
-			long totalQuantity) {
+	public CartItemEntity(Integer userId, double cartTotalPrice, Map<ProductEntity,Integer> products,double totalPrice,Integer quantity) {
 		
 		this.userId = userId;
-		//this.products = products;
-		this.cartTotalPrice = cartTotalPrice;
-		this.totalQuantity = totalQuantity;
+		this.products = products;
+		this.cartTotalPrice = totalPrice;
+		this.totalQuantity = quantity;
 	}
 	public CartItemEntity() {
 		 
@@ -45,22 +47,22 @@ public class CartItemEntity {
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-	/*public Map<ProductEntity, Integer> getProducts() {
+	public Map<ProductEntity, Integer> getProducts() {
 		return products;
 	}
 	public void setProducts(Map<ProductEntity, Integer> products) {
 		this.products = products;
-	}*/
+	}
 	public double getCartTotalPrice() {
 		return cartTotalPrice;
 	}
 	public void setCartTotalPrice(double cartTotalPrice) {
 		this.cartTotalPrice = cartTotalPrice;
 	}
-	public long getTotalQuantity() {
+	public Integer getTotalQuantity() {
 		return totalQuantity;
 	}
-	public void setTotalQuantity(long totalQuantity) {
+	public void setTotalQuantity(Integer totalQuantity) {
 		this.totalQuantity = totalQuantity;
 	}
 	@Override

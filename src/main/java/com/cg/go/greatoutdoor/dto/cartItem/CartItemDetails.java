@@ -1,31 +1,32 @@
 package com.cg.go.greatoutdoor.dto.cartItem;
 
 import java.util.Map;
-import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
-import com.cg.go.greatoutdoor.entity.CartItemEntity;
 import com.cg.go.greatoutdoor.entity.ProductEntity;
 
 public class CartItemDetails {
 	@Id
 	private Integer cartId;
 	private Integer userId;
-	//@ElementCollection
-	//private Map<ProductEntity, Integer> products ;// product ,quantity
+	//@OneToMany(cascade = {CascadeType.ALL})	
+	@ElementCollection
+	private Map<ProductEntity, Integer> products ;// product ,quantity
 	private double cartTotalPrice;
-	private long totalQuantity;
+	private Integer totalQuantity;
 	
 	
 	
-	public CartItemDetails(Integer cartId,Integer userId, double cartTotalPrice, long totalQuantity) {
+	public CartItemDetails(Integer cartId,Integer userId, double cartTotalPrice,Map<ProductEntity, Integer> products, Integer totalQuantity) {
 		
 		this.cartId=cartId;
 		this.userId = userId;
-		//this.products = products;
 		this.cartTotalPrice = cartTotalPrice;
+		this.products = products;
 		this.totalQuantity = totalQuantity;
 	}
 	public CartItemDetails() {
@@ -43,22 +44,22 @@ public class CartItemDetails {
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-	/*public Map<ProductEntity, Integer> getProducts() {
+	public Map<ProductEntity, Integer> getProducts() {
 		return products;
 	}
 	public void setProducts(Map<ProductEntity, Integer> products) {
 		this.products = products;
-	}*/
+	}
 	public double getCartTotalPrice() {
 		return cartTotalPrice;
 	}
 	public void setCartTotalPrice(double cartTotalPrice) {
 		this.cartTotalPrice = cartTotalPrice;
 	}
-	public long getTotalQuantity() {
+	public Integer getTotalQuantity() {
 		return totalQuantity;
 	}
-	public void setTotalQuantity(long totalQuantity) {
+	public void setTotalQuantity(Integer totalQuantity) {
 		this.totalQuantity = totalQuantity;
 	}
 	
