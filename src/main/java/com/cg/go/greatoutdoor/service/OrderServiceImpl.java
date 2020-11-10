@@ -73,7 +73,7 @@ public class OrderServiceImpl implements IOrderService {
         OrderRepository.deleteById(orderId);
         
 	}
-	// Update DispatchDate and arrivalDate based on orderID in the table 
+	// Update DispatchDate and arrivalDate based on orderId in the table 
 	@Override
 	public OrderEntity updateDate(Integer orderId, LocalDate dispatchDate, LocalDate arrivalDate) {
 		boolean exists= OrderRepository.existsById(orderId);

@@ -20,12 +20,15 @@ public class CustomerService implements ICustomerService {
 	@Autowired
 	private ICustomerRepository customerRepository;
 	
+	
+	//Retrieving all Customer records in customers table
 	@Override
 	public List<Customer> getAllCustomers() {
 		List<Customer> list=customerRepository.findAll();
 		return list;
 	}
 
+	//Adding a Customer record to the table
 	@Override
 	public Customer addCustomer(Customer customer) {
 		boolean exists=customer.getCustomerId()!=null && customerRepository.existsById(customer.getCustomerId());
@@ -46,18 +49,14 @@ public class CustomerService implements ICustomerService {
 		return customer;
 	}
 
+	//Removing record based on customerId
 	@Override
 	public void removeCustomer(Integer customerId) {
 		Customer customer=findById(customerId);
 		customerRepository.delete(customer);
 	}
 
-	/*@Override
-	public Customer viewCustomer(Customer customer) {
-		customer=findById(customer.getCustomerId());
-		return customer;
-	}*/
-	
+	//Fetching record based on customerId 
 	@Override
 	public Customer findById(int customerId) {
 		Optional<Customer> optional=customerRepository.findById(customerId);
@@ -67,5 +66,16 @@ public class CustomerService implements ICustomerService {
 		Customer customer=optional.get();
 		return customer;
 	}
+	
+	
+	
+	
+	
+	/*@Override
+	public Customer viewCustomer(Customer customer) {
+		customer=findById(customer.getCustomerId());
+		return customer;
+	}*/
+	
 
 }

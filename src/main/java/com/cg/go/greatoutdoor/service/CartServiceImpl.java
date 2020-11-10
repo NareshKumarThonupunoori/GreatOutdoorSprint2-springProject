@@ -21,12 +21,14 @@ public class CartServiceImpl implements ICartService{
 	@Autowired
 	private ICartItemRepository cartRepository;
 
+	//CartList based on userId
 	@Override
 	public List<CartItemEntity> findCartlist(Integer userId) {
 		List<CartItemEntity> list=cartRepository.findByUserId(userId);
 		return list;
 	}
 
+	//Adding CartItemEntity if record not exists in the table
 	@Override
 	public CartItemEntity addCart(CartItemEntity cartItemEntity) {
 		boolean exists=cartItemEntity.getCartId()!=null && cartRepository.existsById(cartItemEntity.getCartId());
@@ -37,6 +39,7 @@ public class CartServiceImpl implements ICartService{
 		return cartItem;
 	}
 
+	//Updating fields of CartItemEntity if record exists in the table
 	@Override
 	public CartItemEntity updateCart(CartItemEntity cartItemEntity) {
 		boolean exists=cartItemEntity.getCartId()!=null && cartRepository.existsById(cartItemEntity.getCartId());
@@ -47,6 +50,7 @@ public class CartServiceImpl implements ICartService{
 		return cartItem;
 	}
 
+	//Deletion of records based on userId
 	@Override
 	public void deleteCartlist(Integer userId) {
 		List<CartItemEntity> list=findCartlist(userId);
@@ -55,6 +59,8 @@ public class CartServiceImpl implements ICartService{
 		}
 	}
 	
+	
+	//Deleting cartItem based on cartId and productId
 	@Override
 	public void deleteCartItem(Integer cartId, Integer productId) {
 		CartItemEntity cartItem=findById(cartId);
@@ -67,6 +73,7 @@ public class CartServiceImpl implements ICartService{
 		}
 	}
 
+	//Finding the record based on cartId
 	private CartItemEntity findById(Integer cartId) {
 		Optional<CartItemEntity> optional=cartRepository.findById(cartId);
 		if(!optional.isPresent())
@@ -75,6 +82,7 @@ public class CartServiceImpl implements ICartService{
 		return cartItemEntity;
 	}
 
+	//Finding cartItem based on userId and productId
 	@Override
 	public CartItemEntity findCartItem(Integer productId, Integer userId) {
 		List<CartItemEntity> list=findCartlist(userId);

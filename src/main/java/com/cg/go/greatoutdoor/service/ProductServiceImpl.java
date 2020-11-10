@@ -22,12 +22,14 @@ public class ProductServiceImpl implements IProductService{
     @Autowired
     private IProductRepository productRepository;
 
+    //Retrieving all records in products table
 	@Override
 	public List<ProductEntity> findAllProducts() {
 		List<ProductEntity> list=productRepository.findAll();
 		return list;
 	}
 
+	 //Fetching record in products table based on productId
 	@Override
 	public ProductEntity findByProductId(Integer productId) {
 		Optional<ProductEntity> optional=productRepository.findById(productId);
@@ -38,12 +40,14 @@ public class ProductServiceImpl implements IProductService{
 		return product;
 	}
 
+	//Fetching record(s) in products table based on productCategory
 	@Override
 	public List<ProductEntity> findByProductCategory(String productCategory) {
 		List<ProductEntity> list=productRepository.findByCategory(productCategory);
 		return list;
 	}
 
+	//Adding product to the table if it is not exists
 	@Override
 	public ProductEntity addProduct(ProductEntity productEntity) {
 		
@@ -55,6 +59,7 @@ public class ProductServiceImpl implements IProductService{
 		return product;
 	}
 
+	//Updating the product in the table only if it exists
 	@Override
 	public ProductEntity updateProduct(ProductEntity productEntity)  {
 		boolean exists= productRepository.existsById(productEntity.getProductId());
@@ -66,6 +71,7 @@ public class ProductServiceImpl implements IProductService{
 	}
 
 
+	//Deleting record(s) based on productId
 	@Override
 	public void deleteByProductId(Integer productId) {
 		Optional<ProductEntity> optional=productRepository.findById(productId);
@@ -76,6 +82,7 @@ public class ProductServiceImpl implements IProductService{
 		
 	}
 
+	//Finding list of records based on productName
 	@Override
 	public List<ProductEntity> search(String keyword) {
 		List<ProductEntity> list=productRepository.findByProductName(keyword);
@@ -83,11 +90,21 @@ public class ProductServiceImpl implements IProductService{
 		
 	}
 
+	//Finding list of records by filtering based on maximum price
 	@Override
 	public List<ProductEntity> filter(double maxPrice) {
 		List<ProductEntity> list=productRepository.findByRange(maxPrice);
 		return list;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/*@Override
 	public void updateProductQuantity(Integer quantity, Integer productId) {
