@@ -12,33 +12,38 @@ import com.cg.go.greatoutdoor.dao.ICartItemRepository;
 import com.cg.go.greatoutdoor.entity.CartItemEntity;
 import com.cg.go.greatoutdoor.entity.ProductEntity;
 import com.cg.go.greatoutdoor.exception.CartException;
-import com.cg.go.greatoutdoor.exception.ProductException;
 
 @Service
-public class CartServiceImpl implements ICartService{
+public class CartService implements ICartService{
 	
 	
 	@Autowired
 	private ICartItemRepository cartRepository;
 
+	
 	//CartList based on userId
 	@Override
 	public List<CartItemEntity> findCartlist(Integer userId) {
 		List<CartItemEntity> list=cartRepository.findByUserId(userId);
+		if(list.size()==0) {
+			throw new CartException("There is no cartItem with userId="+userId);
+		}
 		return list;
 	}
+	
 
 	//Adding CartItemEntity if record not exists in the table
 	@Override
 	public CartItemEntity addCart(CartItemEntity cartItemEntity) {
 		boolean exists=cartItemEntity.getCartId()!=null && cartRepository.existsById(cartItemEntity.getCartId());
         if(exists){
-            throw new ProductException("Cart already exists for id="+cartItemEntity.getCartId());
+            throw new CartException("Cart already exists for id="+cartItemEntity.getCartId());
         }
         CartItemEntity cartItem=cartRepository.save(cartItemEntity);
 		return cartItem;
 	}
 
+	
 	//Updating fields of CartItemEntity if record exists in the table
 	@Override
 	public CartItemEntity updateCart(CartItemEntity cartItemEntity) {
@@ -50,6 +55,7 @@ public class CartServiceImpl implements ICartService{
 		return cartItem;
 	}
 
+	
 	//Deletion of records based on userId
 	@Override
 	public void deleteCartlist(Integer userId) {
@@ -59,6 +65,16 @@ public class CartServiceImpl implements ICartService{
 		}
 	}
 	
+	//Finding the record based on cartId
+		private CartItemEntity findById(Integer cartId) {
+			Optional<CartItemEntity> optional=cartRepository.findById(cartId);
+			if(!optional.isPresent())
+				throw new CartException("Cart does not exists for id="+cartId);
+			CartItemEntity cartItemEntity=optional.get();
+			return cartItemEntity;
+		}
+		
+		
 	
 	//Deleting cartItem based on cartId and productId
 	@Override
@@ -73,15 +89,7 @@ public class CartServiceImpl implements ICartService{
 		}
 	}
 
-	//Finding the record based on cartId
-	private CartItemEntity findById(Integer cartId) {
-		Optional<CartItemEntity> optional=cartRepository.findById(cartId);
-		if(!optional.isPresent())
-			throw new CartException("Cart does not exists for id="+cartId);
-		CartItemEntity cartItemEntity=optional.get();
-		return cartItemEntity;
-	}
-
+	
 	//Finding cartItem based on userId and productId
 	@Override
 	public CartItemEntity findCartItem(Integer productId, Integer userId) {
@@ -93,10 +101,12 @@ public class CartServiceImpl implements ICartService{
 				if(key.getProductId().equals(productId)) {
 					return cartItem;
 				}
+				else
+					throw new CartException("Cart not found for given productId and userId");
 			}
-			
 		}
 		return null;
+		
 	}
 
 }

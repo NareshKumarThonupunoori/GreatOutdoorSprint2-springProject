@@ -3,6 +3,7 @@ package com.cg.go.greatoutdoor.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -44,6 +45,7 @@ public class CartController {
         CartItemDetails details = toDetails(cartItem);
         return details;
     }
+	
 
 	@PutMapping("/update")
     public CartItemDetails update(@RequestBody UpdateCartItemRequest requestData) {
@@ -54,11 +56,8 @@ public class CartController {
         return details;
     }
 
-
-    
-
 	@GetMapping("/by/userid/{id}")
-    public List<CartItemDetails> findProduct(@PathVariable("id") Integer userId) {
+    public List<CartItemDetails> findCartlist(@PathVariable("id") Integer userId) {
     	List<CartItemEntity> cartItem = cartService.findCartlist(userId);
         List<CartItemDetails> details = toDetails(cartItem);
         return details;
@@ -71,20 +70,15 @@ public class CartController {
         return response;
     }
 	
-	@GetMapping("/by/productid/userid/{userid}/{productid}")
-	 public CartItemDetails findByProductUserId(@PathVariable("userid") Integer userId,@PathVariable("productid") Integer productId) {
-		CartItemEntity cartItem = cartService.findCartItem(productId, userId);
-        CartItemDetails details = toDetails(cartItem);
-        return details;
-    }
+	
+	//To convert cartItemEntity to CartItemDetails
 	private CartItemDetails toDetails(CartItemEntity cartItem) {
 		CartItemDetails details =new CartItemDetails(cartItem.getCartId(),cartItem.getUserId(),cartItem.getCartTotalPrice(),
 				cartItem.getProducts(),cartItem.getTotalQuantity());
 		return details;
 	}
 	
-   
-
+	//To convert list of cartItemEntities to list of CartItemDetails
 	private List<CartItemDetails> toDetails(List<CartItemEntity> cartItem) {
 		List<CartItemDetails> cartDetails=new ArrayList<>();
     	for(CartItemEntity cart:cartItem) {

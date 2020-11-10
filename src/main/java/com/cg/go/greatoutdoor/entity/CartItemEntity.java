@@ -16,7 +16,6 @@ public class CartItemEntity {
 	@Id
 	private Integer cartId;
 	private Integer userId;
-	//@OneToMany(cascade = {CascadeType.ALL})
 	@ElementCollection
 	private Map<ProductEntity, Integer> products ;// product ,quantity
 	private double cartTotalPrice;

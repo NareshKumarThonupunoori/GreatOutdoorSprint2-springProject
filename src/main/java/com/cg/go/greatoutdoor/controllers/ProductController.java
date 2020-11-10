@@ -105,7 +105,7 @@ public class ProductController {
     
 
     private List<ProductDetails> toDetails(List<ProductEntity> products) {
-    	//Log.info("Inside toDetails products:"+products);
+    	
     	List<ProductDetails> productDetails = new ArrayList<>();
         for (ProductEntity product : products) {
         	ProductDetails details = toDetails(product);
