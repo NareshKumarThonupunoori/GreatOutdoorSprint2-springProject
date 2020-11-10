@@ -3,7 +3,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.cg.go.greatoutdoor.entity.SalesReportEntity;
-import com.cg.go.greatoutdoor.exception.SalesReportException;
 
 @Repository
 public interface ISalesReportRepository extends JpaRepository<SalesReportEntity,Long>{

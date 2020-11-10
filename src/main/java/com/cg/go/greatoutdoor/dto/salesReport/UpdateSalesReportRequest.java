@@ -1,7 +1,6 @@
 package com.cg.go.greatoutdoor.dto.salesReport;
 
 import javax.persistence.Id;
-import com.cg.go.greatoutdoor.entity.SalesReportEntity;
 public class UpdateSalesReportRequest {
 	@Id
 	private long salesReportId;

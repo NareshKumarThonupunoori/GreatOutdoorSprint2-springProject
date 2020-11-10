@@ -2,10 +2,8 @@ package com.cg.go.greatoutdoor.dto.cartItem;
 
 import java.util.Map;
 
-import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import com.cg.go.greatoutdoor.entity.ProductEntity;
 

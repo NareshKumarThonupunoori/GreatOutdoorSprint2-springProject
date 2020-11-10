@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.cg.go.greatoutdoor.dao.ICustomerRepository;
 import com.cg.go.greatoutdoor.entity.Customer;
 import com.cg.go.greatoutdoor.exception.CustomerException;
-import com.cg.go.greatoutdoor.exception.ProductException;
 
 @Service
 @Transactional

@@ -4,8 +4,6 @@ package com.cg.go.greatoutdoor.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,8 +27,7 @@ import com.cg.go.greatoutdoor.service.ISalesReportService;
 @RestController
 public class SalesReportController {
 	
-	 private static final Logger Log = LoggerFactory.getLogger(ProductController.class);
-		
+	 
 	@Autowired
 	public ISalesReportService service;
 	

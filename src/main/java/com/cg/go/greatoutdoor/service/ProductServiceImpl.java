@@ -4,8 +4,6 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +15,7 @@ import com.cg.go.greatoutdoor.exception.ProductException;
 @Service
 public class ProductServiceImpl implements IProductService{
 	
-    private static final Logger Log = LoggerFactory.getLogger(ProductServiceImpl.class);
-	
+   
     @Autowired
     private IProductRepository productRepository;
 

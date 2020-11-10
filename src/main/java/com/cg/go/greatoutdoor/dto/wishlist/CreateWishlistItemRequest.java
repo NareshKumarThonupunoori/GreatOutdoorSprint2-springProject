@@ -1,9 +1,6 @@
 package com.cg.go.greatoutdoor.dto.wishlist;
-import java.util.List;
 
-import javax.persistence.ElementCollection;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+
 
 public class CreateWishlistItemRequest {
 //	@NotBlank @Size(min =2, max = 20)

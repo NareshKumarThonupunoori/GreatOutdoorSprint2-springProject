@@ -5,23 +5,17 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.go.greatoutdoor.dao.ISalesReportRepository;
-import com.cg.go.greatoutdoor.entity.Customer;
-import com.cg.go.greatoutdoor.entity.ProductEntity;
 import com.cg.go.greatoutdoor.entity.SalesReportEntity;
-import com.cg.go.greatoutdoor.exception.CustomerException;
-import com.cg.go.greatoutdoor.exception.ProductException;
 import com.cg.go.greatoutdoor.exception.SalesReportException;
 
 @Transactional
 @Service
 public class SalesReportServiceImpl implements ISalesReportService {
-	private static final Logger Log = LoggerFactory.getLogger(SalesReportServiceImpl.class);
 	
 	@Autowired
     private ISalesReportRepository salesReportRepository;
