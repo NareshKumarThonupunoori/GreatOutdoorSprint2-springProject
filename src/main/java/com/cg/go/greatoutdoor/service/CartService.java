@@ -31,6 +31,13 @@ public class CartService implements ICartService{
 		return list;
 	}
 	
+	//To retreive all cartItems
+	@Override
+	public List<CartItemEntity> findallCartItems() {
+		List<CartItemEntity> list=cartRepository.findAll();
+		
+		return list;
+	}
 
 	//Adding CartItemEntity if record not exists in the table
 	@Override
@@ -108,5 +115,7 @@ public class CartService implements ICartService{
 		return null;
 		
 	}
+
+
 
 }

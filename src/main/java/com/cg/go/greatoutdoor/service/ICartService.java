@@ -17,4 +17,6 @@ public interface ICartService {
 
 	public void deleteCartlist(Integer userId);
 
+	public List<CartItemEntity> findallCartItems();
+
 }

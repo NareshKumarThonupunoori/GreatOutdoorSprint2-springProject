@@ -62,6 +62,13 @@ public class CartController {
         List<CartItemDetails> details = toDetails(cartItem);
         return details;
     }
+	
+	@GetMapping("/allCartItems")
+    public List<CartItemDetails> findallCartItems() {
+    	List<CartItemEntity> cartItem = cartService.findallCartItems();
+        List<CartItemDetails> details = toDetails(cartItem);
+        return details;
+    }
     
 	@DeleteMapping("/remove/userid/{id}")
     public String deleteProduct(@PathVariable("id") Integer userId) {
