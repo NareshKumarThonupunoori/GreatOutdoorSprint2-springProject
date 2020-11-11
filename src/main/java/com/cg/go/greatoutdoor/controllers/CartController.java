@@ -66,7 +66,7 @@ public class CartController {
 	@DeleteMapping("/remove/userid/{id}")
     public String deleteProduct(@PathVariable("id") Integer userId) {
         cartService.deleteCartlist(userId);
-        String response = "removed products with userid=" + userId;
+        String response = "removed cartItems with userid=" + userId;
         return response;
     }
 	

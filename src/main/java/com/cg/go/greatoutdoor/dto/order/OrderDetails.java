@@ -1,20 +1,29 @@
 package com.cg.go.greatoutdoor.dto.order;
 
 import java.time.LocalDate;
+import java.util.Map;
+
+import javax.persistence.ElementCollection;
+
+import com.cg.go.greatoutdoor.entity.ProductEntity;
 
 public class OrderDetails {
 	private Integer orderId;
 	private Integer userId;
+	@ElementCollection
+	private Map<ProductEntity,Integer> products; // products,Quantity
+	
 	private double totalPrice;
 	private long totalQuantity;
 	private LocalDate dispatchDate;
 	private LocalDate deliveryDate;
 	public OrderDetails(Integer orderId, Integer userId, double totalPrice,
-			long totalQuantity, LocalDate dispatchDate, LocalDate deliveryDate) {
+			long totalQuantity, Map<ProductEntity,Integer> products,LocalDate dispatchDate, LocalDate deliveryDate) {
 		this.orderId = orderId;
 		this.userId = userId;
 		this.totalPrice = totalPrice;
 		this.totalQuantity = totalQuantity;
+		this.products=products;
 		this.dispatchDate = dispatchDate;
 		this.deliveryDate = deliveryDate;
 	}
@@ -42,6 +51,13 @@ public class OrderDetails {
 	public void setTotalQuantity(long totalQuantity) {
 		this.totalQuantity = totalQuantity;
 	}
+	public Map<ProductEntity, Integer> getProducts() {
+		return products;
+	}
+	public void setProducts(Map<ProductEntity, Integer> products) {
+		this.products = products;
+	}
+	
 	public LocalDate getDispatchDate() {
 		return dispatchDate;
 	}

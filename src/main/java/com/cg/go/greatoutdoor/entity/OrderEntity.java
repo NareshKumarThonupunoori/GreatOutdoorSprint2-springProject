@@ -1,8 +1,7 @@
 package com.cg.go.greatoutdoor.entity;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.Objects;
 @Entity
 public class OrderEntity {
@@ -11,15 +10,17 @@ public class OrderEntity {
 	private Integer orderId;
 	private Integer userId;
 	private double totalPrice;
+	@ElementCollection
+	private Map<ProductEntity,Integer> products; // products,Quantity
 	private long totalQuantity;
 	private LocalDate dispatchDate;
 	private LocalDate deliveryDate;
 	public OrderEntity(Integer userId, double totalPrice,
-			long totalQuantity, LocalDate dispatchDate, LocalDate deliveryDate) {
-		
+			long totalQuantity, Map<ProductEntity,Integer> products,LocalDate dispatchDate, LocalDate deliveryDate) {
 		this.userId = userId;
 		this.totalPrice = totalPrice;
 		this.totalQuantity = totalQuantity;
+		this.products=products;
 		this.dispatchDate = dispatchDate;
 		this.deliveryDate = deliveryDate;
 	}
@@ -82,6 +83,12 @@ public class OrderEntity {
 		} else if (!orderId.equals(other.orderId))
 			return false;
 		return true;
+	}
+	public Map<ProductEntity,Integer> getProducts() {
+		return products;
+	}
+	public void setProducts(Map<ProductEntity, Integer> products2) {
+		this.products = products2;
 	}
 
 }
