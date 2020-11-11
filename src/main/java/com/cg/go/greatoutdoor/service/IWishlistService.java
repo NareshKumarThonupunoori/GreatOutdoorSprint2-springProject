@@ -3,7 +3,7 @@ package com.cg.go.greatoutdoor.service;
 import java.util.List;
 
 import com.cg.go.greatoutdoor.entity.WishlistItemEntity;
-
+import com.cg.go.greatoutdoor.exception.WishlistException;
 
 
 public interface IWishlistService {
@@ -12,14 +12,18 @@ public interface IWishlistService {
 
 	
 
-	//WishlistItemEntity findWishlistItem(String productId, String userId);
-	//void addProductToWishlist(String prodId,long wishlistID);
-	//void deleteWishlistItem(int productId, String userId) throws WishlistException;
-
+	WishlistItemEntity findWishlistItem(String productId, int userId);
+	void addProductToWishlist(String productIds,int wishlistID);
+	void deleteWishlistItem(String productId, int userId) throws WishlistException;
+	WishlistItemEntity findWishListById(int wishlistID);
 	void deleteByUserId(int userId) ;
 
 	WishlistItemEntity addWishlistItem(WishlistItemEntity wishlistItem);
 
 	List<WishlistItemEntity> findByUserId(int userId);
+
+
+
+
 
 }

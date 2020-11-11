@@ -1,36 +1,38 @@
 package com.cg.go.greatoutdoor.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Wishlist")
+@Table(name = "wishlists")
 public class WishlistItemEntity {
     @GeneratedValue
     @Id
-    private Integer wishlistId;
-    private Integer userId;
-   // @ElementCollection
-    //private List<String> productId;
+    private int wishlistId;
+    private int userId;
 
-    public WishlistItemEntity(int userId) {
 
+    @CollectionTable(name = "wishlists_products",joinColumns = @JoinColumn(name = "wishlistid"))
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Column(name = "products")
+    private List<String> productIds;
+
+    public WishlistItemEntity(int userId, List<String> productId) {
         this.userId = userId;
-      //  this.productId = productId;
+        this.productIds = productId;
     }
 
     public WishlistItemEntity() {
+
     }
 
-    public Integer getWishlistId() {
+    public int getWishlistId() {
         return wishlistId;
     }
 
-    public void setWishlistId(Integer wishlistId) {
+    public void setWishlistId(int wishlistId) {
         this.wishlistId = wishlistId;
     }
 
@@ -42,13 +44,13 @@ public class WishlistItemEntity {
         this.userId = userId;
     }
 
-   // public List<String> getProductId() {
-     //   return productId;
-    //}
+    public List<String> getProductIds() {
+        return productIds;
+    }
 
-  //  public void setProductId(List<String> productId) {
-    //    this.productId = productId;
-    //}
+    public void setProductIds(List<String> productIds) {
+        this.productIds = productIds;
+    }
 
     @Override
     public int hashCode() {

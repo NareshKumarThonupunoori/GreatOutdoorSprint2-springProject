@@ -1,34 +1,43 @@
 package com.cg.go.greatoutdoor.dto.wishlist;
 
+import java.util.List;
 
 public class WishlistItemDetails {
-	private int wishlistId;
+    private int wishlistId;
     private int userId;
-   // @ElementCollection
-   // private List<String> productId;
-    public WishlistItemDetails() {}
-	public WishlistItemDetails(int wishlistId, int userId) {
-		
-		this.wishlistId = wishlistId;
-		this.userId = userId;
-		//this.productId = productId;
-	}
-	public int getWishlistId() {
-		return wishlistId;
-	}
-	public void setWishlistId(int wishlistId) {
-		this.wishlistId = wishlistId;
-	}
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-	/*public List<String> getProductId() {
-		return productId;
-	}
-	public void setProductId(List<String> productId) {
-		this.productId = productId;
-	}*/
+
+    private List<String> productIds;
+
+    public WishlistItemDetails() {
+    }
+
+    public WishlistItemDetails(int wishlistId, int userId, List<String> productIds) {
+        this.wishlistId = wishlistId;
+        this.userId = userId;
+        this.productIds = productIds;
+    }
+
+    public int getWishlistId() {
+        return wishlistId;
+    }
+
+    public void setWishlistId(int wishlistId) {
+        this.wishlistId = wishlistId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public List<String> getProductIds() {
+        return productIds;
+    }
+
+    public void setProductIds(List<String> productIds) {
+        this.productIds = productIds;
+    }
 }
