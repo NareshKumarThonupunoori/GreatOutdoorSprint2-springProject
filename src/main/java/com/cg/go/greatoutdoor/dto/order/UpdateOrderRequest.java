@@ -3,11 +3,19 @@ package com.cg.go.greatoutdoor.dto.order;
 import java.time.LocalDate;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import com.cg.go.greatoutdoor.entity.Userdata;
 
 public class UpdateOrderRequest {
+	
+	@Id
 	private Integer orderId;
-	private Integer userId;	
+	@OneToOne(cascade = {CascadeType.ALL})
+	private Userdata userId;	
 	@ElementCollection
 	private Map<Integer,Integer> products; // productIds,Quantity
 	private LocalDate dispatchDate;
@@ -18,10 +26,10 @@ public class UpdateOrderRequest {
 	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
-	public Integer getUserId() {
+	public Userdata getUserId() {
 		return userId;
 	}
-	public void setUserId(Integer userId) {
+	public void setUserId(Userdata userId) {
 		this.userId = userId;
 	}
 	

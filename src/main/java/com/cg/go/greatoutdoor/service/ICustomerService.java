@@ -9,10 +9,10 @@ import com.cg.go.greatoutdoor.entity.Customer;
 public interface ICustomerService {
 
 
-	List<Customer> getAllCustomers();
-	Customer addCustomer(Customer customer);
-	Customer updateCustomer(Customer customer);
-	void removeCustomer(Integer customerId);
+	public List<Customer> getAllCustomers();
+	public Customer addCustomer(Customer customer);
+	public Customer updateCustomer(Customer customer);
+	public void removeCustomer(Integer customerId);
 	public Customer findById(int customerId);
 	//Customer viewCustomer(Customer customer);
 }

@@ -45,7 +45,7 @@ public class OrderServiceImpl implements IOrderService {
 	// Add orders using the order entity table
 	@Override
 	public OrderEntity addOrder(OrderEntity orderEntity) {
-		boolean exists=orderEntity.getUserId()!=null &&OrderRepository.existsById(orderEntity.getUserId());
+		boolean exists=orderEntity.getUserId()!=null &&OrderRepository.existsById(orderEntity.getOrderId());
         if(exists){
             throw new OrderException("Order already exists for id="+orderEntity.getUserId());
         }  

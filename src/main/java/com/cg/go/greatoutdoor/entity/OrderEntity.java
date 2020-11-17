@@ -8,14 +8,15 @@ public class OrderEntity {
 	@GeneratedValue
 	@Id
 	private Integer orderId;
-	private Integer userId;
+	@OneToOne(cascade = {CascadeType.ALL})
+	private Userdata userId;
 	private double totalPrice;
 	@ElementCollection
 	private Map<ProductEntity,Integer> products; // products,Quantity
 	private long totalQuantity;
 	private LocalDate dispatchDate;
 	private LocalDate deliveryDate;
-	public OrderEntity(Integer userId, double totalPrice,
+	public OrderEntity(Userdata userId, double totalPrice,
 			long totalQuantity, Map<ProductEntity,Integer> products,LocalDate dispatchDate, LocalDate deliveryDate) {
 		this.userId = userId;
 		this.totalPrice = totalPrice;
@@ -32,10 +33,10 @@ public class OrderEntity {
 	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
-	public Integer getUserId() {
+	public Userdata getUserId() {
 		return userId;
 	}
-	public void setUserId(Integer userId) {
+	public void setUserId(Userdata userId) {
 		this.userId = userId;
 	}
 	

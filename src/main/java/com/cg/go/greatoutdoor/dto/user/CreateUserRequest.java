@@ -1,0 +1,48 @@
+package com.cg.go.greatoutdoor.dto.user;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+public class CreateUserRequest {
+
+	@GeneratedValue
+	@Id
+	private Integer userId;
+	private String userName;
+	private String userType;
+	private String userPassword;
+	
+	public CreateUserRequest() {
+		
+	}
+	public CreateUserRequest(String userName, String userType, String userPassword) {
+		
+		this.userName = userName;
+		this.userType = userType;
+		this.userPassword = userPassword;
+	}
+	public Integer getUserId() {
+		return userId;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getUserType() {
+		return userType;
+	}
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+	public String getUserPassword() {
+		return userPassword;
+	}
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
+	}
+}

@@ -2,21 +2,29 @@ package com.cg.go.greatoutdoor.dto.cartItem;
 
 import java.util.Map;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import com.cg.go.greatoutdoor.entity.Userdata;
+
 
 public class UpdateCartItemRequest {
 	
+	@Id
 	private Integer cartId;
-	private Integer userId;
+	@OneToOne(cascade = {CascadeType.ALL})
+	private Userdata userId;
 	private Map<Integer,Integer> products;  // productIds,Quantity
 	
 	
 	public UpdateCartItemRequest() {
 		
 	}
-	public Integer getUserId() {
+	public Userdata getUserId() {
 		return userId;
 	}
-	public void setUserId(Integer userId) {
+	public void setUserId(Userdata userId) {
 		this.userId = userId;
 	}
 	public Map<Integer, Integer> getProducts() {

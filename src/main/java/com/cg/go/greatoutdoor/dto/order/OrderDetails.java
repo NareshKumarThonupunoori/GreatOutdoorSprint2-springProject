@@ -3,13 +3,20 @@ package com.cg.go.greatoutdoor.dto.order;
 import java.time.LocalDate;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import com.cg.go.greatoutdoor.entity.ProductEntity;
+import com.cg.go.greatoutdoor.entity.Userdata;
 
 public class OrderDetails {
+	
+	@Id
 	private Integer orderId;
-	private Integer userId;
+	@OneToOne(cascade = {CascadeType.ALL})
+	private Userdata userId;
 	@ElementCollection
 	private Map<ProductEntity,Integer> products; // products,Quantity
 	
@@ -17,10 +24,10 @@ public class OrderDetails {
 	private long totalQuantity;
 	private LocalDate dispatchDate;
 	private LocalDate deliveryDate;
-	public OrderDetails(Integer orderId, Integer userId, double totalPrice,
+	public OrderDetails(Integer orderId, Userdata userdata, double totalPrice,
 			long totalQuantity, Map<ProductEntity,Integer> products,LocalDate dispatchDate, LocalDate deliveryDate) {
 		this.orderId = orderId;
-		this.userId = userId;
+		this.userId = userdata;
 		this.totalPrice = totalPrice;
 		this.totalQuantity = totalQuantity;
 		this.products=products;
@@ -33,10 +40,10 @@ public class OrderDetails {
 	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
-	public Integer getUserId() {
+	public Userdata getUserId() {
 		return userId;
 	}
-	public void setUserId(Integer userId) {
+	public void setUserId(Userdata userId) {
 		this.userId = userId;
 	}
 	public double getTotalPrice() {

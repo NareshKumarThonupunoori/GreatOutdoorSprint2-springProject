@@ -2,15 +2,19 @@ package com.cg.go.greatoutdoor.dto.cartItem;
 
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import com.cg.go.greatoutdoor.entity.ProductEntity;
+import com.cg.go.greatoutdoor.entity.Userdata;
 
 public class CartItemDetails {
 	@Id
 	private Integer cartId;
-	private Integer userId;
+	@OneToOne(cascade = {CascadeType.ALL})
+	private Userdata userId;
 	//@OneToMany(cascade = {CascadeType.ALL})	
 	@ElementCollection
 	private Map<ProductEntity, Integer> products ;// product ,quantity
@@ -19,10 +23,10 @@ public class CartItemDetails {
 	
 	
 	
-	public CartItemDetails(Integer cartId,Integer userId, double cartTotalPrice,Map<ProductEntity, Integer> products, Integer totalQuantity) {
+	public CartItemDetails(Integer cartId,Userdata userdata, double cartTotalPrice,Map<ProductEntity, Integer> products, Integer totalQuantity) {
 		
 		this.cartId=cartId;
-		this.userId = userId;
+		this.userId = userdata;
 		this.cartTotalPrice = cartTotalPrice;
 		this.products = products;
 		this.totalQuantity = totalQuantity;
@@ -36,10 +40,10 @@ public class CartItemDetails {
 	public void setCartId(Integer cartId) {
 		this.cartId = cartId;
 	}
-	public Integer getUserId() {
+	public Userdata getUserId() {
 		return userId;
 	}
-	public void setUserId(Integer userId) {
+	public void setUserId(Userdata userId) {
 		this.userId = userId;
 	}
 	public Map<ProductEntity, Integer> getProducts() {
