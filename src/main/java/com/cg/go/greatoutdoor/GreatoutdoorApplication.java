@@ -10,4 +10,9 @@ public class GreatoutdoorApplication {
 		SpringApplication.run(GreatoutdoorApplication.class, args);
 	}
 
+
+	//public void run(String... args) throws Exception {
+		
+//	}
+	
 }
