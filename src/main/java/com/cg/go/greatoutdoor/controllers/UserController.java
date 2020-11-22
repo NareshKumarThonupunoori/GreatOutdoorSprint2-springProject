@@ -14,38 +14,40 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.go.greatoutdoor.dto.user.CreateUserRequest;
-import com.cg.go.greatoutdoor.dto.user.UserResponse;
+import com.cg.go.greatoutdoor.dto.user.UserSignUpResponse;
 import com.cg.go.greatoutdoor.entity.Userdata;
-import com.cg.go.greatoutdoor.service.IUserService;
+import com.cg.go.greatoutdoor.service.AuthService;
 
 @RestController
-@RequestMapping("/auth")
 public class UserController {
 
     @Autowired
-    private IUserService userService;
+    private AuthService authService;
 
     @PostMapping("/signUp")
-    public UserResponse addUser(@RequestBody CreateUserRequest requestData) {
-        Userdata user = new Userdata(requestData.getUserName(), requestData.getUserType(), requestData.getUserPassword());
-        return userService.addUser(user);
+    public UserSignUpResponse addUser(@RequestBody CreateUserRequest requestData) {
+    	return authService.userSignUp(new Userdata(
+    			requestData.getUserName(),
+                "ROLE_"+requestData.getUserType(),
+                requestData.getUserPassword()
+        ));
     }
 
-    @GetMapping("/admin/welcome")
-    public String adminLogin() {
-        return "Welcome To website";
-    }
-    
 
-    @GetMapping("/user/welcome")
-    public String userLogin() {
-        return "Welcome To website";
+    @GetMapping("/welcome")
+    public String welcome(){
+        return "<h1>Welcome</h1>";
     }
 
-    @GetMapping("/logout")
-    public @ResponseBody
-    Userdata logout(Userdata user) {
-        return userService.logout(user);
+    @GetMapping("/user")
+    public String user(){
+        return "This is User";
     }
+
+    @GetMapping("/admin")
+    public String admin(){
+        return "This is Admin";
+    }
+
 
 }

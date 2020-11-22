@@ -5,9 +5,6 @@ import javax.persistence.Id;
 
 public class CreateUserRequest {
 
-	@GeneratedValue
-	@Id
-	private Integer userId;
 	private String userName;
 	private String userType;
 	private String userPassword;
@@ -21,12 +18,7 @@ public class CreateUserRequest {
 		this.userType = userType;
 		this.userPassword = userPassword;
 	}
-	public Integer getUserId() {
-		return userId;
-	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+	
 	public String getUserName() {
 		return userName;
 	}

@@ -33,9 +33,6 @@ public class WishlistItemController {
     @Autowired
     private WishlistUtil wishlistutil;
 
-	/**
-     * effective url will be http://localhost:8585/cartitem/add
-     */
     
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/products/add")
